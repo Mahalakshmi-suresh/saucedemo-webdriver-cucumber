@@ -2,20 +2,21 @@ const { Given, When, Then } = require('@wdio/cucumber-framework');
 const { expect, $ } = require('@wdio/globals')
 
 const LoginPage = require('../pageobjects/login.page');
-const HomePage = require('../pageobjects/home.page');
-
-const pages = {
-    login: LoginPage,
-    home: HomePage
-}
+const testData = require('../test-data/testData.json');
 
 
 Given(/^I am on the login page$/, async () => {
     await LoginPage.open();
 });
 
-When(/^I login with "([^"]*)" and "([^"]*)"$/, async (username, password) => {
-    await LoginPage.login(username, password);
+When(/^I login with credential set "([^"]*)"$/, async (credentialSetKey) => {
+    const credentials = testData.login.credentialSets[credentialSetKey];
+
+    if (!credentials) {
+        throw new Error(`Credential set not found in test data: ${credentialSetKey}`);
+    }
+
+    await LoginPage.login(credentials.username, credentials.password);
 });
 
 Then(/^I should be redirected to the products page$/, async () => {
@@ -30,10 +31,17 @@ Then(/^I should be redirected to the products page$/, async () => {
     await expect(productsTitle).toHaveText('Products');
 });
 
-Then(/^I should see an error message "([^"]*)"$/, async (expectedMessage) => {
+Then(/^I should see an error message key "([^"]*)"$/, async (messageKey) => {
+    const expectedMessage = testData.login.messages[messageKey];
+
+    if (!expectedMessage) {
+        throw new Error(`Error message key not found in test data: ${messageKey}`);
+    }
+
     // Error message appears in a div with data-test="error"
     const errorDiv = await $('[data-test="error"]');
     await expect(errorDiv).toBeExisting();
     await expect(errorDiv).toHaveText(expectedMessage);
 });
+
 

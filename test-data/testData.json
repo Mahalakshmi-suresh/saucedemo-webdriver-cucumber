@@ -1,0 +1,48 @@
+{
+  "login": {
+    "credentialSets": {
+      "valid": {
+        "username": "standard_user",
+        "password": "secret_sauce"
+      },
+      "invalidUsername": {
+        "username": "invalid_user",
+        "password": "secret_sauce"
+      },
+      "invalidPassword": {
+        "username": "standard_user",
+        "password": "invalid_password"
+      },
+      "emptyUsernameAndPassword": {
+        "username": "",
+        "password": ""
+      },
+      "emptyPassword": {
+        "username": "standard_user",
+        "password": ""
+      }
+    },
+    "messages": {
+      "invalidCredentials": "Epic sadface: Username and password do not match any user in this service",
+      "usernameRequired": "Epic sadface: Username is required",
+      "passwordRequired": "Epic sadface: Password is required"
+    }
+  },
+  "products": {
+    "names": {
+      "backpack": "Sauce Labs Backpack",
+      "bikeLight": "Sauce Labs Bike Light",
+      "boltTShirt": "Sauce Labs Bolt T-Shirt",
+      "fleeceJacket": "Sauce Labs Fleece Jacket",
+      "onesie": "Sauce Labs Onesie",
+      "allTheThingsRedTshirt": "Test.allTheThings() T-Shirt (Red)"
+    },
+    "prices": {
+      "backpack": "$29.99",
+      "bikeLight": "$9.99"
+    },
+    "totals": {
+      "backpackAndBikeLight": "$39.98"
+    }
+  }
+}
