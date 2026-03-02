@@ -129,8 +129,9 @@ exports.config = {
     cucumberOpts: {
         // <string[]> (file/dir) require files before executing features
             require: [
-                './step-definitions/products.steps.js',
-                './step-definitions/login.steps.js'
+                './step-definitions/given.js',
+                './step-definitions/when.js',
+                './step-definitions/then.js'
             ],
         // <boolean> show full backtrace for errors
         backtrace: false,

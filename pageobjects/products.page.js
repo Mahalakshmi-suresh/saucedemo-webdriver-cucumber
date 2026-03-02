@@ -113,31 +113,6 @@ class ProductsPage extends Page {
 		return `$${total.toFixed(2)}`;
 	}
 
-	async getQuantityForProductInCart(productName) {
-		const cartItem = await this._cartItemByName(productName);
-		const quantityElement = await cartItem.$('.cart_quantity');
-		return quantityElement.getText();
-	}
-
-	async getEmptyCartMessage() {
-		const message = await $('.cart_empty_message');
-		if (await message.isExisting()) {
-			return message.getText();
-		}
-
-		return '';
-	}
-
-	async increaseProductQuantityInCart(productName, quantity) {
-		const cartItem = await this._cartItemByName(productName);
-		const quantityInput = await cartItem.$('input[type="number"], select');
-
-		if (!await quantityInput.isExisting()) {
-			throw new Error(`Quantity update is not supported in the cart UI for product: ${productName}`);
-		}
-
-		await quantityInput.setValue(quantity);
-	}
 }
 
 module.exports = new ProductsPage();
